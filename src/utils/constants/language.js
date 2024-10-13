@@ -1,0 +1,6 @@
+export const LANGUAGE = {
+    VALIDATION: {
+        REQUIRED_FIELD: "FIELD INI WAJIB DIISI",
+        PASSWORD_MATCH: "PASSWORD TIDAK SAMA"
+    }
+}
