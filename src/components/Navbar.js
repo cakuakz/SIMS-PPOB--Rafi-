@@ -17,7 +17,7 @@ const Navbar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="nav-link">
+                    <Link className="nav-link" to="/akun">
                         Akun
                     </Link>
                 </li>

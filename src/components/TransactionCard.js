@@ -19,7 +19,7 @@ const TransactionCard = ({ type, description, amount, created }) => {
     const formattedDateTime = `${formattedDate}, ${formattedTime}`;
 
     return ( 
-        <div className="p-4 flex flex-row justify-between border border-slate-400 rounded">
+        <div className="p-4 flex flex-row justify-between border border-slate-400 rounded mb-5">
             <div className="flex flex-col">
                 <div className="flex flex-row items-center space-x-2">
                     {type === "TOPUP" ? <FaPlus className="text-slate-400 mt-1" /> : <FaMinus className="text-red-600"/>}

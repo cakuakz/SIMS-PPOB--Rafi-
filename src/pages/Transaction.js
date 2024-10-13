@@ -2,13 +2,15 @@ import { useSelector } from "react-redux";
 import AuthenticatedLayout from "../components/AuthenticatedLayout";
 import { useGetTransactionHistoryQuery } from "../utils/services/transaction";
 import TransactionCard from "../components/TransactionCard";
+import { useState } from "react";
 
 const Transaction = () => {
     const user = useSelector((state) => state.user.data)
-    const { data, error, isLoading } = useGetTransactionHistoryQuery({
+    const [limit, setLimit] = useState(5)
+    const { data, error, isLoading, refetch } = useGetTransactionHistoryQuery({
         offset: 0,  
-        limit: 3,
-    });
+        limit,
+    })
     
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading transaction history.</div>;
@@ -28,6 +30,16 @@ const Transaction = () => {
                         created={record.created_on}
                     />
                 ))}
+                <span 
+                    className="text-center w-full py-5 nav-link"
+                    onClick={() => {
+                        setLimit(limit + 5)
+                        refetch()
+                        console.log(limit)
+                    }}
+                >
+                    Show More
+                </span>
             </div>
         </AuthenticatedLayout>
     );
