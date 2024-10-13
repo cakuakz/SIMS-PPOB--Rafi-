@@ -16,3 +16,8 @@ export const LoginSchema = z.object({
     email: z.string().email().min(1, { messgae: requiredField }),
     password: z.string().min(1, { message: requiredField })
 })
+
+export const EditUserScheam = z.object({
+    first_name: z.string().min(1, { message: requiredField }),
+    last_name: z.string().min(1, { message: requiredField }),
+})
