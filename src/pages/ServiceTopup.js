@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AuthenticatedLayout from "../components/AuthenticatedLayout";
 import { FaRegKeyboard } from "react-icons/fa";
 import CustomInput from "../components/CustomInput";
@@ -6,11 +6,13 @@ import CustomButton from "../components/CustomButton";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { usePostServicePaymentMutation } from "../utils/services/transaction";
+import { setBalanceData } from "../utils/slice/user";
 
 const ServiceTopup = () => {
     const user = useSelector((state) => state.user.data)
     const transaction = useSelector((state) => state.transaction.data)
     const [postServicePayment] = usePostServicePaymentMutation()
+    const dispatch = useDispatch()
 
     const {
         register,
@@ -29,6 +31,7 @@ const ServiceTopup = () => {
                 .unwrap()
                 .then((res) => {
                     toast.success(res && res.message)
+                    dispatch(setBalanceData(user.balance - res.data.total_amount))
                 })
                 .catch((error) => {
                     console.error(error)

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import BalanceProtectContainer from "./BalanceProtectContainer";
 import Navbar from "./Navbar";
+import { defaultProfPic } from "./static";
 
 const AuthenticatedLayout = ({ 
     children, 
@@ -16,10 +17,11 @@ const AuthenticatedLayout = ({
             <div className="flex flex-row justify-between px-20">
                 <div className="grid">
                     <img 
-                        src="/profile_pic.png" 
+                        src={users.profile_image === defaultProfPic ? "/profile_pic.png" : users.profile_image}
                         alt="profile_pic"
+                        className="w-28 rounded-full"
                     />
-                    <p className="mt-8 text-lg">Selamat Datang, </p>
+                    <p className="mt-6 text-lg">Selamat Datang, </p>
                     <h1 className="text-3xl ">{`${users.first_name} ${users.last_name}`}</h1>
                 </div>
                 <div>

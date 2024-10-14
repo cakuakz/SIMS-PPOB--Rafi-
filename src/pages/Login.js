@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { loginUser } from "../utils/services/auth.js";
 import { useNavigate } from "react-router-dom";
 import { setCredentials } from "../utils/constants/storage.js";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 const LinkedText = ({ href }) => {
     return (
@@ -19,6 +21,7 @@ const LinkedText = ({ href }) => {
 
 const Login = () => {
     const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(false)
     const {
         register,
         handleSubmit,
@@ -33,6 +36,7 @@ const Login = () => {
     })
 
     const onSubmit = async () => {
+        setIsLoading(true)
         const payload = {
             email: getValues("email"),
             password: getValues("password")
@@ -43,11 +47,17 @@ const Login = () => {
                 if (response && response.data.token) {
                     setCredentials(response)
                     navigate("/homepage")
+                } else if (response.status === 400) {
+                    toast.error(response.data.message)
                 } else {
                     console.error("Login failed: No token received")
                 }
+                setIsLoading(false)
             })
-            .catch((error) => console.error(error))
+            .catch((error) => {
+                console.error(error)
+                setIsLoading(false)
+            })
     }
 
     return ( 
@@ -66,12 +76,13 @@ const Login = () => {
                         label={attribute.label}
                         type={attribute.type}
                         logo={attribute.logo}
-                        error={errors}
+                        error={errors[attribute.name]}
                     />
                 ))}
                 <CustomButton 
                     text="Masuk"
                     type="submit"
+                    isLoading={isLoading}
                 />
             </form>
         </LayoutAuth>

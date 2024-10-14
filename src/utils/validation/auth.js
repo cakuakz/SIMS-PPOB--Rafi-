@@ -1,8 +1,8 @@
-import { titleCase } from "text-case";
+import { capitalCase } from "text-case";
 import { z } from "zod";
 import { LANGUAGE } from "../constants/language";
 
-const requiredField = titleCase(LANGUAGE.VALIDATION.REQUIRED_FIELD)
+const requiredField = capitalCase(LANGUAGE.VALIDATION.REQUIRED_FIELD)
 
 export const RegisterSchema = z.object({
     email: z.string().email().min(1, { messgae: requiredField }),

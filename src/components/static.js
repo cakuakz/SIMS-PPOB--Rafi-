@@ -7,7 +7,7 @@ export const LoginInputAttribute = [
         name: "email",
         label: "masukkan email anda",
         type: "text",
-        logo: <MdOutlineAlternateEmail className="text-slate-400"/>
+        logo: <MdOutlineAlternateEmail className="text-slate-400"/>,
     },
     {
         name: "password",
@@ -152,3 +152,5 @@ export const TopupPriceCard = [
         value: 500000
     },
 ]
+
+export const defaultProfPic = "https://minio.nutech-integrasi.com/take-home-test/null"

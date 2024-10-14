@@ -20,8 +20,20 @@ const generalAPI = API.injectEndpoints({
                 url: ENDPOINTS.GET.PROFILE,
                 method: 'get'
             })
+        }),
+        putImageFile: builder.mutation({
+            query: (imgFile) => {
+                const formData = new FormData();
+                formData.append('file', imgFile); 
+
+                return {
+                    url: ENDPOINTS.PUT.PROFILE_PIC,
+                    method: 'put',
+                    body: formData,
+                }
+            }
         })
     })
 })
 
-export const { useGetServicesQuery, useGetBannerQuery, useGetUserPropertyQuery } = generalAPI
+export const { useGetServicesQuery, useGetBannerQuery, useGetUserPropertyQuery, usePutImageFileMutation } = generalAPI

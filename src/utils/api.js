@@ -5,13 +5,15 @@ const axiosBaseQuery =
   ({ baseUrl } = { baseUrl: '' }) =>
   async ({ url, method, body, params, headers }) => {
     try {
+      const isFileUpload = body instanceof File
+
       const result = await api({
         url: baseUrl + url,
         method,
         data: body,
         params,
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': isFileUpload ? 'mulitpart/form-data' : 'application/json',
             ...headers,
         },
       })

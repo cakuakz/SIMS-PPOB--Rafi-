@@ -18,6 +18,9 @@ const userSlice = createSlice({
             ...action.payload
         }
       },
+      setBalanceData: (state, action) => {
+        state.data.balance = action.payload
+      },
       clearUserData: (state) => {
         state.data = {
           email: '',
@@ -30,5 +33,5 @@ const userSlice = createSlice({
     },
   })
   
-  export const { setUserData, clearUserData } = userSlice.actions
+  export const { setUserData, clearUserData, setBalanceData } = userSlice.actions
   export default userSlice

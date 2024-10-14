@@ -10,9 +10,10 @@ export const ENDPOINTS = {
         LOGIN: "/login",
         REGISTRATION: "/registration",
         TOPUP: "/topup",
-        TRANSACTION: "/transaction"
+        TRANSACTION: "/transaction",
     },
     PUT: {
-        PROFILE: "/profile/update"
+        PROFILE: "/profile/update",
+        PROFILE_PIC: "/profile/image"
     }
 }

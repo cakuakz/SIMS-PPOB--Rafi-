@@ -9,6 +9,7 @@ import { registerUser } from "../utils/services/auth";
 import toast from "react-hot-toast";
 import { titleCase } from "text-case";
 import { LANGUAGE } from "../utils/constants/language";
+import { useState } from "react";
 
 const LinkedText = ({ href }) => {
     return (
@@ -19,7 +20,7 @@ const LinkedText = ({ href }) => {
 }
 
 const Registers = () => {
-
+    const [isLoading, setIsLoading] = useState(false)
     const {
         register,
         handleSubmit,
@@ -37,18 +38,11 @@ const Registers = () => {
         }
     })
 
-    const errorState = [
-        errors.email,
-        errors.first_name,
-        errors.last_name,
-        errors.password,
-        errors.confirm_password
-    ]
-
     const onSubmit = async () => {
         if (getValues("password") !== getValues("confirm_password")) {
             toast.error(titleCase(LANGUAGE.VALIDATION.PASSWORD_MATCH))
         } else {
+            setIsLoading(true)
             const payload = {
                 email: getValues("email"),
                 first_name: getValues("first_name"),
@@ -67,12 +61,14 @@ const Registers = () => {
                 })
                 toast.success(response.message)
                 console.log(response)
+                setIsLoading(false)
             })
             .catch((error) => {
                 if (error.response && error.response.data) {
                     toast.error(error.response.data.message || "An error occurred")
                 }
                 console.error(error)
+                setIsLoading(false)
             })
         }
     }
@@ -84,7 +80,7 @@ const Registers = () => {
         >
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="flex flex-col justify-center my-4 space-y-8"
+                className="flex flex-col justify-center my-4 space-y-6"
             >
                 {RegisterInputAttribute.map((attribute) => (
                     <CustomInput
@@ -93,12 +89,13 @@ const Registers = () => {
                         label={attribute.label}
                         type={attribute.type}
                         logo={attribute.logo}
-                        error={errorState.map((error) => error)}
+                        error={errors[attribute.name]}
                     />
                 ))}
                 <CustomButton 
                     text="Registrasi"
                     type="submit"
+                    isLoading={isLoading}
                 />
             </form>
         </LayoutAuth>

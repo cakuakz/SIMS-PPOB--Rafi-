@@ -19,3 +19,7 @@ code {
 .nav-link {
   @apply active:text-gray-800 cursor-pointer focus:text-red-600 focus:font-bold focus:outline-none
 }
+
+.nav-link-pressed {
+  @apply text-red-600 cursor-pointer font-bold outline-none
+}
