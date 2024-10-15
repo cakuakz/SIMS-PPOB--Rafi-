@@ -3,6 +3,8 @@ import AuthenticatedLayout from "../components/AuthenticatedLayout";
 import { useGetTransactionHistoryQuery } from "../utils/services/transaction";
 import TransactionCard from "../components/TransactionCard";
 import { useState, useEffect } from "react";
+import { capitalCase } from "text-case";
+import { LANGUAGE } from "../utils/constants/language";
 
 const Transaction = () => {
     const user = useSelector((state) => state.user.data);
@@ -32,7 +34,7 @@ const Transaction = () => {
             balance={user.balance}
         >
             <div className="flex flex-col px-20 mt-10">
-                <p className="mb-4 text-lg font-semibold">Semua Transaksi</p>
+                <p className="mb-4 text-lg font-semibold">{capitalCase(LANGUAGE.BANNER_TEXT.ALL_TRANSACTION)}</p>
                 {transactions.map((record) => (
                     <TransactionCard
                         type={record.transaction_type}
@@ -48,7 +50,7 @@ const Transaction = () => {
                         refetch()
                     }}
                 >
-                    Show More
+                    {capitalCase(LANGUAGE.BANNER_TEXT.SHOW_MORE)}
                 </span>
             </div>
         </AuthenticatedLayout>

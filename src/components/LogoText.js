@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { LANGUAGE } from "../utils/constants/language";
 
 const LogoText = () => {
     const navigate = useNavigate()
@@ -11,7 +12,7 @@ const LogoText = () => {
             }}
         >
             <img src="/sims_logo.png" alt="logo sims" />
-            <p className="text-black font-semibold text-xl">SIMS PPOB</p>
+            <p className="text-black font-semibold text-xl">{LANGUAGE.BANNER_TEXT.TITLE}</p>
         </div>
      );
 }

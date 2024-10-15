@@ -13,6 +13,8 @@ import { FaPen } from "react-icons/fa";
 import { Upload, message } from "antd";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa";
+import { capitalCase } from "text-case";
+import { LANGUAGE } from "../utils/constants/language";
 
 const Akun = () => {
     const { data: userData, error: userDataError, isLoading: isUserDataLoading } = useGetUserPropertyQuery()
@@ -24,13 +26,13 @@ const Akun = () => {
     const beforeUpload = (file) => {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
         if (!isJpgOrPng) {
-            message.error('Hanya bisa mengupload file dengan format JPEG/PNG!')
+            message.error(capitalCase(LANGUAGE.VALIDATION.IMAGE_SIZE))
             return Upload.LIST_IGNORE
         }
     
         const isLt100KB = file.size / 1024 < 100
         if (!isLt100KB) {
-            message.error('Ukuran gambar harus lebih kecil dari 100KB!')
+            message.error(capitalCase(LANGUAGE.VALIDATION.IMAGE_FORMAT))
             return Upload.LIST_IGNORE
         }
     
@@ -110,11 +112,11 @@ const Akun = () => {
                     className="flex flex-col items-center mt-8 space-y-6 w-full xl:px-[400px] px-6"
                 >
                     <div className="flex flex-col justify-start mb-3 w-full">
-                        <p className="text-black font-medium text-md mb-2">Email</p>
+                        <p className="text-black font-medium text-md mb-2">{capitalCase(LANGUAGE.INPUT.PLACEHOLDER.EMAIL)}</p>
                         <CustomInput 
                             register={register}
                             name="email"
-                            label="Email"
+                            label={capitalCase(LANGUAGE.INPUT.PLACEHOLDER.EMAIL)}
                             disabled
                             error={errors.email}
                             logo={<MdOutlineAlternateEmail />}
@@ -123,11 +125,11 @@ const Akun = () => {
                         />
                     </div>
                     <div className="flex flex-col justify-start mb-3 w-full">
-                        <p className="text-black font-medium text-md mb-2">First Name</p>
+                        <p className="text-black font-medium text-md mb-2">{capitalCase(LANGUAGE.INPUT.PLACEHOLDER.FIRST_NAME)}</p>
                         <CustomInput 
                             register={register}
                             name="first_name"
-                            label="First Name"
+                            label={capitalCase(LANGUAGE.INPUT.PLACEHOLDER.FIRST_NAME)}
                             disabled={disabled}
                             logo={<FaRegUser />}
                             error={errors.first_name}
@@ -135,11 +137,11 @@ const Akun = () => {
                         />
                     </div>
                     <div className="flex flex-col justify-start mb-3 w-full">
-                        <p className="text-black font-medium text-md mb-2">Last Name</p>
+                        <p className="text-black font-medium text-md mb-2">{capitalCase(LANGUAGE.INPUT.PLACEHOLDER.LAST_NAME)}</p>
                         <CustomInput 
                             register={register}
                             name="last_name"
-                            label="Last Name"
+                            label={capitalCase(LANGUAGE.INPUT.PLACEHOLDER.LAST_NAME)}
                             disabled={disabled}
                             logo={<FaRegUser />}
                             error={errors.last_name}
@@ -149,7 +151,7 @@ const Akun = () => {
                     {disabled ? (
                         <div className="flex flex-col mt-4 space-y-3 w-full items-center">
                             <CustomButton 
-                                text="Edit Profile"
+                                text={capitalCase(LANGUAGE.BUTTON.ACTION_TEXT.EDIT_PROFILE)}
                                 onClick={(e) => {
                                     e.preventDefault()
                                     setDisabled(false)
@@ -157,7 +159,7 @@ const Akun = () => {
                                 classname="border-2 border-red-600 bg-white text-red-600 rounded py-2 w-full"
                             />
                             <CustomButton 
-                                text="Logout"
+                                text={capitalCase(LANGUAGE.BUTTON.ACTION_TEXT.LOGOUT)}
                                 onClick={() => {
                                     removeAccessToken()
                                     window.location.reload()
@@ -168,12 +170,12 @@ const Akun = () => {
                     ) : (
                         <div className="flex flex-col mt-4 space-y-3 w-full items-center">
                             <CustomButton 
-                                text="Simpan"
+                                text={capitalCase(LANGUAGE.BUTTON.ACTION_TEXT.SIMPAN)}
                                 type="submit"
                                 classname="border-2 border-red-600 bg-white text-red-600 w-full rounded py-2"
                             />
                             <CustomButton 
-                                text="Batal"
+                                text={capitalCase(LANGUAGE.BUTTON.ACTION_TEXT.BATAL)}
                                 onClick={(e) => {
                                     e.preventDefault()
                                     setDisabled(true);

@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { usePostServicePaymentMutation } from "../utils/services/transaction";
 import { setBalanceData } from "../utils/slice/user";
+import { capitalCase } from "text-case";
+import { LANGUAGE } from "../utils/constants/language";
 
 const ServiceTopup = () => {
     const user = useSelector((state) => state.user.data)
@@ -25,7 +27,7 @@ const ServiceTopup = () => {
         }
         
         if (user.balance <= transaction.service_tariff) {
-            toast.error("Saldo tidak mencukupi")
+            toast.error(capitalCase(LANGUAGE.VALIDATION.INSUFFICENT_BALANCE))
         } else {
             postServicePayment(payload)
                 .unwrap()
@@ -47,7 +49,7 @@ const ServiceTopup = () => {
         >
             <div className="flex flex-col px-20">
                 <div className="flex flex-col my-16">
-                    <p className="text-xl">Pembayaran</p>
+                    <p className="text-xl">{capitalCase(LANGUAGE.BANNER_TEXT.SERVICE_TOPUP_BANNER)}</p>
                     <h1 className="text-3xl font-semibold">{transaction.service_name}</h1>
                 </div>
                 <form

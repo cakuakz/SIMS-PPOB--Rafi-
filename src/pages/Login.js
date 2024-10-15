@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { setCredentials } from "../utils/constants/storage.js";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { LANGUAGE } from "../utils/constants/language.js";
 
 const LinkedText = ({ href }) => {
     return (
@@ -62,7 +63,7 @@ const Login = () => {
 
     return ( 
         <LayoutAuth
-            title="Masuk atau buat akun untuk memulai"
+            title={LANGUAGE.BANNER_TEXT.LOGIN_TITLE}
             linkText={<LinkedText href="/register" />}
         >
             <form

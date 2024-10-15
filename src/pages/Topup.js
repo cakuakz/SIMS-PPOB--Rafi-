@@ -12,6 +12,8 @@ import { usePostTopupBalanceMutation } from "../utils/services/transaction";
 import toast from "react-hot-toast";
 import { setBalanceData } from "../utils/slice/user";
 import { useState } from "react";
+import { capitalCase } from "text-case";
+import { LANGUAGE } from "../utils/constants/language";
 
 const Topup = () => {
     const user = useSelector((state) => state.user.data)
@@ -59,20 +61,18 @@ const Topup = () => {
             users={user}
             balance={user.balance}
         >
-            <div className="flex flex-col px-20">
-                <div className="flex flex-col my-16">
-                    <p className="text-xl">Silahkan masukan</p>
-                    <h1 className="text-3xl font-semibold">Nominal Top Up</h1>
+            <div className="flex flex-col px-4 lg:px-20">
+                <div className="flex flex-col my-8 lg:my-16">
+                    <p className="text-lg lg:text-xl">{capitalCase(LANGUAGE.BANNER_TEXT.PLEASE_WELCOME)}</p>
+                    <h1 className="text-2xl lg:text-3xl font-semibold">{capitalCase(LANGUAGE.BANNER_TEXT.BALANCE_NOMINAL)}</h1>
                 </div>
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                >
-                    <div className="flex flex-row justify-between xl:space-x-4">
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="grid gap-6 lg:flex lg:flex-row lg:justify-between xl:space-x-4">
                         <div className="flex flex-col space-y-6 w-full">
                             <CustomInput 
                                 register={register}
                                 name="top_up_amount"
-                                label="masukkan nominal Top Up"
+                                label="Masukkan nominal Top Up"
                                 type="number"
                                 logo={<FaRegKeyboard className="text-slate-400"/>}
                                 error={errors.top_up_amount}
@@ -86,7 +86,8 @@ const Topup = () => {
                                 disabled={isButtonDisabled}
                             />
                         </div>
-                        <div className="grid grid-cols-3 gap-3 w-[600px]">
+                        {/* Responsive Topup Cards */}
+                        <div className="grid grid-cols-1 gap-3 lg:grid-cols-3 w-full lg:w-[600px]">
                             {TopupPriceCard.map((card) => (
                                 <TopupCard 
                                     key={card.key}

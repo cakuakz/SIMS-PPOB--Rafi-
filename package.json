@@ -20,6 +20,7 @@
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
     "text-case": "^1.0.9",
+    "text-upper-case-first": "^1.0.2",
     "web-vitals": "^2.1.4",
     "zod": "^3.23.8"
   },

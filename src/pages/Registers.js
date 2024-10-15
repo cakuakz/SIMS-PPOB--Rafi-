@@ -75,7 +75,7 @@ const Registers = () => {
 
     return ( 
         <LayoutAuth
-            title="Lengkapi data untuk membuat akun"
+            title={LANGUAGE.BANNER_TEXT.REGISTER_TITLE}
             linkText={<LinkedText href="/" />}
         >
             <form

@@ -1,3 +1,4 @@
+import { capitalCase } from "text-case";
 import LogoText from "./LogoText";
 
 const LayoutAuth = ({ children, title, linkText }) => {
@@ -5,7 +6,7 @@ const LayoutAuth = ({ children, title, linkText }) => {
         <div className="flex flex-row justify-between h-screen items-center w-full">
             <div className="flex flex-col justify-center items-center text-center w-full">
                 <LogoText />
-                <span className="text-black font-semibold text-2xl px-64 text-center my-10">{title}</span>
+                <span className="text-black font-semibold text-2xl px-64 text-center my-10">{capitalCase(title)}</span>
                 {children}
                 {linkText}
             </div>
